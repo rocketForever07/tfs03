@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .container{
+            position: absolute;
+            top: 100px;
+            left: calc(50% - 90px);
+        }
+        table{
+            width: 150px;
+        }
+        #result{
+            width: 180px;
+            font-size: 15px;
+            padding: 16px 5px;
+            text-align: right;
+            border: none;
+            background-color: #F8F8F8;
+        }
+        input{
+            padding: 15px;
+            font-weight: bold;
+            font-size: 16px;
+            border: none;
+            border-radius: 3px;
+            background-color: #F2F2F2;
+            width: 100%;
+        }
+        input:hover{
+            background-color: rgb(171, 175, 162);
+        }
+
+        #exc{
+            background-color: rgb(75, 223, 107);
+        }
+        #exc:hover{
+            background-color: #12cf3b;
+        }
+
+        #del{
+            background-color: tomato;
+
+        }
+        #del:hover{
+            background-color: rgb(197, 43, 16);
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <input type="text" id="result" value="">
+        <table>
+            <tr>
+                <td><input type="button" value="1" class=" display"></td>
+                <td><input type="button" value="2" class=" display"></td>
+                <td><input type="button" value="3" class=" display"></td>
+                <td><input type="button" value="+" class=" display"></td>
+            </tr>
+            <tr>
+                <td><input type="button" value="4" class=" display"></td>
+                <td><input type="button" value="5" class=" display"></td>
+                <td><input type="button" value="6" class=" display"></td>
+                <td><input type="button" value="-" class=" display"></td>
+            </tr>
+            <tr>
+                <td><input type="button" value="7" class=" display"></td>
+                <td><input type="button" value="8" class=" display"></td>
+                <td><input type="button" value="9" class=" display"></td>
+                <td><input type="button" value="x" class=" display"></td>
+            </tr>
+            <tr>
+                <td colspan="2"><input type="button" value="0" class=" display"></td>
+                <td><input type="button" value="%" class=" display"></td>
+                <td><input type="button" value="/" class=" display"></td>
+            </tr>
+            <tr>
+                <td><input type="button" value="Del" id="del"></td>
+                <td colspan="3"><input type="button" value="=" id="exc"></td>
+            </tr>
+        </table>
+    </div>
+
+    <script>
+        var displayText="";
+        
+        var displayLst=document.getElementsByClassName("display");
+
+        for(let i=0;i<displayLst.length;i++){
+            displayLst[i].addEventListener("click",()=>{
+                displayText += displayLst[i].value;
+                document.getElementById("result").value = displayText;
+                console.log(displayLst[i].value);
+            })
+        }
+
+        document.getElementById("del").addEventListener("click",()=>{
+            displayText="";
+            document.getElementById("result").value = displayText;
+        })
+
+        //call api
+        document.getElementById("exc").addEventListener("click",()=>{
+            // console.log(displayText);
+            let dataReq=JSON.stringify({"exprestion": displayText})
+
+            
+            fetch('http://localhost:8080/cal', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: dataReq,
+            })
+            .then(response => response.json())
+            .then(data => {
+                displayText=data.exprestion;
+                document.getElementById("result").value = displayText;
+                console.log('Success:', data);
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        })
+    </script>
+</body>
+
+</html>
+
+
+
