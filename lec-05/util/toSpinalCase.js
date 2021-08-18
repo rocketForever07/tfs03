@@ -4,7 +4,7 @@ function toSpinalCase(str) {
     //replace space with '-'
     newStr = newStr.replace(/ /g, '-');
     //replace operator with '-'
-    newStr = newStr.replace(/_/g,'-');
+    newStr = newStr.replace(/[_*+//\\]/g,'-');
 
 
     return newStr.toLowerCase()
