@@ -5,6 +5,8 @@
 | Doan Trong Khoi  |   TFS - 03   |
 
 
+# Directory's tree
+```
 ├── lec-01
 ├── lec-02
 │   ├── api
