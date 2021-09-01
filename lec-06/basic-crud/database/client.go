@@ -27,7 +27,7 @@ func Connect(connectString string) error{
 }
 
 
-//Migrate create/updates database table
+//Migrate create/updates table by model
 func Migrate(table *entity.Person) {
 	Connector.AutoMigrate(&table)
 	log.Println("Table migrated")
