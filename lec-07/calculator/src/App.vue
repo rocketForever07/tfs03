@@ -40,11 +40,12 @@ import * as axios from "axios";
 export default {
   name: 'App',
   data(){
-        return {
-            displayText:"",
-            mainButtonList: ['1' ,'2','3','+','4','5','6','-','7','8','9','x','0','%','/','Del','='],
-        };
-    },
+    return {
+        displayText:"",
+        displayResult: false,
+        // mainButtonList: ['1' ,'2','3','+','4','5','6','-','7','8','9','x','0','%','/','Del','='],
+    };
+  },
 
   methods: {
       mainButton(ch){
@@ -52,7 +53,12 @@ export default {
               this.displayText="";
           }else if(ch==="="){
               this.excute(this.displayText)
+              this.displayResult=true;
           }else{
+              if(this.displayResult==true){
+                this.displayResult=false;
+                this.displayText="";
+              }
               this.displayText+=ch;
           }
       },
