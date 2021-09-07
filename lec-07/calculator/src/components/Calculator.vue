@@ -34,46 +34,36 @@
 </template>
 
 <script>
-import * as axios from "axios";
-
-
 export default {
-  name: 'App',
-  data(){
+
+    name: "Calculator",
+
+    data(){
         return {
             displayText:"",
             mainButtonList: ['1' ,'2','3','+','4','5','6','-','7','8','9','x','0','%','/','Del','='],
         };
     },
 
-  methods: {
-      mainButton(ch){
-          if(ch==="Del"){
-              this.displayText="";
-          }else if(ch==="="){
-              this.excute(this.displayText)
-          }else{
-              this.displayText+=ch;
-          }
-      },
+    methods: {
+        mainButton(ch){
+            if(ch==="Del"){
+                this.displayText="";
+            }else if(ch==="="){
+                this.excute(displayText)
+            }else{
+                this.displayText+=ch;
+            }
+        },
 
-      excute(expression){
-        console.log(expression)
-        this.displayText="ok";
+        excute(expression){
+            
+            this.displayText="ok";
+        }
 
-        var seft=this;
+    },
 
-        axios.post("localhost:10000/calculator",expression)
-        .then(function(res){
-          seft.displayText=res.data;
-        })
-        .catch(function(res){
-          seft.displayText="call api";
-          console.log(res)
-        })
-      }
-  },
-
+    
 }
 </script>
 
@@ -122,3 +112,4 @@ export default {
         background-color: rgb(197, 43, 16);
     }
 </style>>
+
