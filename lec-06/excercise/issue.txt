@@ -1,0 +1,4 @@
+project còn một số việc chưa làm
+
+-Chưa làm authorization vs authentication
+-chưa tách biệt model request,response.Đang dùng chung models entty khi gọi api

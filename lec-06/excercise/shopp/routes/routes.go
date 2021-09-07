@@ -18,7 +18,6 @@ import(
 
 func Init(){
 
-
 	//main route
 	router := mux.NewRouter().StrictSlash(true)
 	//payment route
@@ -65,7 +64,6 @@ func Init(){
 	//handle for payment route
 	paymentRoute.HandleFunc("",paymentController.GetAll).Methods("GET")
 	paymentRoute.HandleFunc("",paymentController.Create).Methods("POST")
-
 
 	//handle for order route
 	orderRoute.HandleFunc("",orderController.GetAll).Methods("GET")
